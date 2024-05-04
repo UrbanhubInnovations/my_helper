@@ -16,6 +16,7 @@ abstract class ThemeColors {
   static const Color primary = Color(0xFF3ABFFA);
   static const Color primaryBg = Color(0xFFEEEEEE);
   static const Color white = Color(0xFFFFFFFF);
+  static const Color offWhite = Color(0xFFE7E7EE);
   static const Color grey = Color(0xFF2E2E2E);
   static const Color greyText = Color(0xFF646464);
   static const Color green = Color(0xFF5CB85C);
