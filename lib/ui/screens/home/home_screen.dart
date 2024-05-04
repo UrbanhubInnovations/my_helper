@@ -79,12 +79,7 @@ class _Drawer extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Drawer Header'),
-            ),
+             const UserAccountsDrawerHeader(accountName: Text('data'), accountEmail: Text('accountEmail'),),
             ListTile(
               title: const Text('Home'),
               trailing: const Icon(Icons.home),
