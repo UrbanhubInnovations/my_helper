@@ -34,8 +34,8 @@
 
     <application
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
-        android:label="my_helper">
+        android:icon="@mipmap/launcher_icon"
+        android:label="My Helper">
 
         <receiver
             android:name="com.shounakmulay.telephony.sms.IncomingSmsReceiver"
