@@ -27,7 +27,7 @@ class ContactInstructionScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,7 +37,7 @@ class ContactInstructionScreen extends StatelessWidget {
                   ),
                   const Gap(10),
                   const Text(
-                    'myhelper <YourPincode> get_contact <ContactName>',
+                    'MyHelper <YourPincode> getContact <ContactName>',
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 14,

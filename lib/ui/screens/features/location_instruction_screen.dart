@@ -37,7 +37,7 @@ class LocationInstructionScreen extends StatelessWidget {
                   ),
                   const Gap(10),
                   const Text(
-                    'myhelper <YourPincode> get_location',
+                    'MyHelper <YourPincode> getLocation',
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 14,

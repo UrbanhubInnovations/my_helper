@@ -37,7 +37,7 @@ class AlarmInstructionScreen extends StatelessWidget {
                   ),
                   const Gap(10),
                   const Text(
-                    'myhelper <YourPincode> alarm',
+                    'MyHelper <YourPincode> alarm',
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 14,

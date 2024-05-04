@@ -37,7 +37,7 @@ class SoundProfileInstructionScreen extends StatelessWidget {
                   ),
                   const Gap(10),
                   const Text(
-                    'myhelper <YourPincode> ring',
+                    'MyHelper <YourPincode> ring',
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 14,

@@ -19,10 +19,10 @@ import '../../repository/settings/settings_repository.dart';
 import '../../repository/user/user_repository.dart';
 import '../base/base_provider.dart';
 
-const _myHelper = 'myhelper';
-const _contactCommand = 'get_contact';
+const _myHelper = 'MyHelper';
+const _contactCommand = 'getContact';
 const _soundCommand = 'ring';
-const _locationCommand = 'get_location';
+const _locationCommand = 'getLocation';
 const _alarmCommand = 'alarm';
 
 const _alarmId = 2500;
