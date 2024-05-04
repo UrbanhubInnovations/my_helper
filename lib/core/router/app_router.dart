@@ -17,5 +17,6 @@ class AppRouter extends $AppRouter {
     AutoRoute(path: '/register', page: RegisterRoute.page),
     AutoRoute(path: '/home', page: HomeRoute.page),
     AutoRoute(path: '/settings', page: SettingsRoute.page),
+    AutoRoute(path: '/change-pin', page: ChangePinRoute.page),
   ];
 }

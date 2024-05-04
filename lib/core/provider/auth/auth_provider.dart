@@ -140,6 +140,70 @@ class AuthProvider extends BaseProvider {
     }
   }
 
+  Future<void> updateName({required String newName}) async {
+    try {
+      if (newName.isEmpty) {
+        _snackBarAlert.showToast(message: 'Please enter a valid name.');
+        return;
+      }
+      final user = _user!.copyWith(name: newName);
+      await _userRepository.saveUser(user);
+
+      _user = user;
+      _snackBarAlert.showToast(message: 'Name updated successfully.');
+    } catch (e) {
+      _snackBarAlert.showToast(message: 'Something went wrong.');
+      log(e.toString(), name: 'Error');
+    } finally {
+      setViewIdeal();
+    }
+  }
+
+  Future<void> updatePassword({required String newPassword, required String confirmPassword}) async {
+    try {
+      if (newPassword.isEmpty) {
+        _snackBarAlert.showToast(message: 'Please enter a valid password.');
+        return;
+      }
+
+      if (newPassword != confirmPassword) {
+        _snackBarAlert.showToast(message: 'Password doesn\'t match.');
+        return;
+      }
+
+      final user = _user!.copyWith(password: newPassword);
+      await _userRepository.saveUser(user);
+
+      _user = user;
+      _snackBarAlert.showToast(message: 'Password updated successfully.');
+    } catch (e) {
+      _snackBarAlert.showToast(message: 'Something went wrong.');
+      log(e.toString(), name: 'Error');
+    } finally {
+      setViewIdeal();
+    }
+  }
+
+  Future<void> updatePin({required String pincode}) async {
+    try {
+      if (!_isValidPincode(pincode)) {
+        _snackBarAlert.showToast(message: 'Please enter a valid pincode.');
+        return;
+      }
+
+      final user = _user!.copyWith(pin: int.parse(pincode));
+      await _userRepository.saveUser(user);
+
+      _user = user;
+      _snackBarAlert.showToast(message: 'Pincode updated successfully.');
+    } catch (e) {
+      _snackBarAlert.showToast(message: 'Something went wrong.');
+      log(e.toString(), name: 'Error');
+    } finally {
+      setViewIdeal();
+    }
+  }
+
   Future<void> logout() async {
     await _settingsRepository.saveLogin(isLoggedIn: false);
     await _appRouter.replaceAll([const LoginRoute()]);

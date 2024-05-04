@@ -59,6 +59,14 @@ class PermissionProvider extends BaseProvider {
 
   bool get isAlarmRinging => _settingsRepository.settings.isAlarmRinging;
 
+  bool get enableContact => _settingsRepository.settings.enableContact;
+
+  bool get enableLocation => _settingsRepository.settings.enableLocation;
+
+  bool get enableSoundProfile => _settingsRepository.settings.enableSoundProfile;
+
+  bool get enableAlarm => _settingsRepository.settings.enableAlarm;
+
   final SettingsRepository _settingsRepository;
 
   PermissionProvider(this._settingsRepository);
@@ -116,6 +124,21 @@ class PermissionProvider extends BaseProvider {
     setViewIdeal();
   }
 
+  Future<void> savePreference({
+    bool? enableContact,
+    bool? enableLocation,
+    bool? enableSoundProfile,
+    bool? enableAlarm,
+  }) async {
+    await _settingsRepository.savePreference(
+      enableContact: enableContact,
+      enableAlarm: enableAlarm,
+      enableLocation: enableLocation,
+      enableSoundProfile: enableSoundProfile,
+    );
+    setViewIdeal();
+  }
+
   Future<void> _setupSMS() async {
     if (!isAllAllowed) {
       return;
@@ -165,10 +188,14 @@ Future<void> backgroundMessageHandler(SmsMessage message) async {
 Future<String?> _getResponse(String? body) async {
   final command = _extractCommand(body);
 
+  final settings = locator<SettingsRepository>().settings;
   log(command.toString(), name: 'Command');
 
   switch (command) {
     case _contactCommand:
+      if (!settings.enableContact) {
+        return null;
+      }
       final contactName = _extractContactName(body);
       log(contactName.toString());
       if (contactName == null) {
@@ -177,12 +204,22 @@ Future<String?> _getResponse(String? body) async {
       return _getContact(contactName);
 
     case _soundCommand:
+      if (!settings.enableSoundProfile) {
+        return null;
+      }
+
       final isUpdated = await _changeSoundProfile();
 
       return isUpdated ? 'Changed Profile to Ring Mode' : 'Failed to change';
     case _locationCommand:
+      if (!settings.enableLocation) {
+        return null;
+      }
       return _getCurrentLocation();
     case _alarmCommand:
+      if (!settings.enableAlarm) {
+        return null;
+      }
       return _setAlarm();
   }
 

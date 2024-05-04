@@ -47,7 +47,7 @@ class SnackBarAlert {
                         child: Text(
                           message,
                           style: const TextStyle(
-                            color: ThemeColors.black,
+                            color: ThemeColors.white,
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                           ),
@@ -68,7 +68,7 @@ class SnackBarAlert {
                         child: Text(
                           actionText ?? 'Dismiss',
                           style: const TextStyle(
-                            color: ThemeColors.black,
+                            color: ThemeColors.white,
                             fontWeight: FontWeight.w500,
                             fontSize: 12,
                           ),
