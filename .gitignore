@@ -1,0 +1,99 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+custom_lint.log
+
+
+
+# Translations folder
+lib/assets/translations/translation_keys.g.dart
+
+# Generated files
+**.g.**
+**.gr.**
+**.freezed.**
+**.config.**
+**.hive.**
+
+# Web related
+lib/generated_plugin_registrant.dart
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Exceptions to above rules.
+!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+
+#DO not upload credentials/keys/sensitive data
+.env
+lib/.env.dart
+
+# Secrets
+/config/*
+!/config/.gitkeep
+
+# auto-generated fastlane files
+fastlane/README.md
+fastlane/report.xml
+
+# iOS binaries
+**/**.app.dSYM.zip
+**/**.ipa
+
+# Android code signing
+android/key*.properties
+*.keystore
+google_play.json
+#GoogleService-Info.plist
+#google-services.json
+
+# Makefile virtual targets
+.flutter_analyze
+.flutter_build_common
+.flutter_build_dev
+.flutter_build_release
+.google_services_android_dev
+.google_services_android_prod
+.google_services_ios_dev
+.google_services_ios_prod
+.ios_debug
+.ios_release
+
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
