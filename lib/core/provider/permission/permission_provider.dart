@@ -195,7 +195,7 @@ Future<String?> _getContact(String name) async {
 
     Contact? contact;
     for (final element in contacts) {
-      if (element.displayName == name) {
+      if (element.displayName.toLowerCase() == name.toLowerCase()) {
         contact = element;
       }
     }

@@ -57,8 +57,8 @@ class AuthProvider extends BaseProvider {
 
   Future<void> login({required String email, required String password}) async {
     try {
-      if (email.isEmpty) {
-        _snackBarAlert.showToast(message: 'Please enter email.');
+      if (email.isEmpty || !_isValidEmail(email)) {
+        _snackBarAlert.showToast(message: 'Please enter a valid email.');
         return;
       }
 
@@ -97,8 +97,8 @@ class AuthProvider extends BaseProvider {
         _snackBarAlert.showToast(message: 'Please enter name.');
         return;
       }
-      if (email.isEmpty) {
-        _snackBarAlert.showToast(message: 'Please enter email.');
+      if (email.isEmpty || !_isValidEmail(email)) {
+        _snackBarAlert.showToast(message: 'Please enter a valid email.');
         return;
       }
 
@@ -112,7 +112,7 @@ class AuthProvider extends BaseProvider {
         return;
       }
 
-      if (pincode.length != 4) {
+      if (!_isValidPincode(pincode)) {
         _snackBarAlert.showToast(message: 'Please enter a valid pincode.');
         return;
       }
@@ -138,5 +138,28 @@ class AuthProvider extends BaseProvider {
     } finally {
       setViewIdeal();
     }
+  }
+
+  Future<void> logout() async {
+    await _settingsRepository.saveLogin(isLoggedIn: false);
+    await _appRouter.replaceAll([const LoginRoute()]);
+  }
+
+  bool _isValidEmail(String email) {
+    final RegExp emailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$');
+    if (!emailRegex.hasMatch(email)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  bool _isValidPincode(String pincode) {
+    final RegExp pincodeRegex = RegExp(r'^\d{4}$');
+    if (!pincodeRegex.hasMatch(pincode)) {
+      return false;
+    }
+
+    return true;
   }
 }

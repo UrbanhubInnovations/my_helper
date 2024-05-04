@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/provider/auth/auth_provider.dart';
 import '../../../core/provider/permission/permission_provider.dart';
 import '../../utils/constants/theme_colors.dart';
 import '../../widgets/buttons/primary_button.dart';
@@ -17,6 +18,10 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           title: const Text('My Helper'),
+          titleTextStyle: const TextStyle(
+            fontSize: 20,
+            color: ThemeColors.black,
+          ),
         ),
         drawer: const _Drawer(),
         body: Padding(
@@ -71,11 +76,8 @@ class _Drawer extends StatelessWidget {
               },
             ),
             ListTile(
-              title: const Text('Item 2'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
+              title: const Text('Logout'),
+              onTap: () => context.read<AuthProvider>().logout(),
             ),
           ],
         ),

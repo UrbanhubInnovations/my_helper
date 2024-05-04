@@ -15,6 +15,7 @@ class PrimaryTextField extends StatelessWidget {
   final VoidCallback? onTap;
   final bool readOnly;
   final String? suffixText;
+  final int? maxLength;
 
   const PrimaryTextField({
     required this.hintText,
@@ -30,6 +31,7 @@ class PrimaryTextField extends StatelessWidget {
     this.onTap,
     this.readOnly = false,
     this.suffixText,
+    this.maxLength,
   });
 
   @override
@@ -45,6 +47,7 @@ class PrimaryTextField extends StatelessWidget {
           color: ThemeColors.black,
         ),
         textInputAction: textInputAction,
+        maxLength: maxLength,
         autofocus: autoFocus,
         keyboardType: keyboardType,
         textCapitalization: TextCapitalization.sentences,
@@ -76,76 +79,3 @@ class PrimaryTextField extends StatelessWidget {
         ),
       );
 }
-//
-// class SecondaryTextFormField extends StatelessWidget {
-//   final String hintText;
-//   final TextInputType? keyboardType;
-//   final TextInputAction? textInputAction;
-//   final bool autoFocus;
-//   final String? suffixText;
-//   final Icon? icon;
-//   final TextEditingController? controller;
-//   final VoidCallback? onTap;
-//   final String? Function(String? value)? validate;
-//
-//   const SecondaryTextFormField({
-//     required this.hintText,
-//     this.onTap,
-//     this.keyboardType,
-//     this.textInputAction,
-//     this.autoFocus = false,
-//     super.key,
-//     this.icon,
-//     this.suffixText,
-//     this.controller,
-//     this.validate,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context) => TextFormField(
-//         validator: validate,
-//         onTap: onTap,
-//         controller: controller,
-//         style: const TextStyle(
-//           fontSize: ThemeTextStyle.body2,
-//           color: ThemeColors.white,
-//         ),
-//         textInputAction: textInputAction,
-//         autofocus: autoFocus,
-//         keyboardType: keyboardType,
-//         textCapitalization: TextCapitalization.sentences,
-//         decoration: InputDecoration(
-//           suffixText: suffixText,
-//           suffixStyle: const TextStyle(
-//             color: Colors.white,
-//             fontWeight: FontWeight.w400,
-//             fontSize: ThemeTextStyle.body3,
-//           ),
-//           prefixIcon: icon,
-//           prefixIconColor: ThemeColors.grey,
-//           contentPadding: const EdgeInsets.all(16),
-//           isDense: false,
-//           hintText: hintText,
-//           hintStyle: const TextStyle(
-//             fontSize: ThemeTextStyle.body1,
-//             color: ThemeColors.grey,
-//           ),
-//           errorBorder: const OutlineInputBorder(
-//             borderRadius: BorderRadius.all(Radius.circular(15)),
-//             borderSide: BorderSide(color: ThemeColors.red),
-//           ),
-//           focusedErrorBorder: const OutlineInputBorder(
-//             borderRadius: BorderRadius.all(Radius.circular(15)),
-//             borderSide: BorderSide(color: ThemeColors.red),
-//           ),
-//           focusedBorder: const OutlineInputBorder(
-//             borderRadius: BorderRadius.all(Radius.circular(15)),
-//             borderSide: BorderSide(color: ThemeColors.primaryBorder),
-//           ),
-//           enabledBorder: const OutlineInputBorder(
-//             borderRadius: BorderRadius.all(Radius.circular(15)),
-//             borderSide: BorderSide(color: ThemeColors.primaryBorder),
-//           ),
-//         ),
-//       );
-// }
