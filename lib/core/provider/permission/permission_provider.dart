@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:math' as math;
 
 import 'package:alarm/alarm.dart';
 import 'package:alarm/model/alarm_settings.dart';
@@ -16,6 +15,7 @@ import 'package:sound_mode/utils/ringer_mode_statuses.dart';
 
 import '../../hive/hive_adapter.dart';
 import '../../injection/injection.dart';
+import '../../repository/settings/settings_repository.dart';
 import '../../repository/user/user_repository.dart';
 import '../base/base_provider.dart';
 
@@ -24,6 +24,8 @@ const _contactCommand = 'get_contact';
 const _soundCommand = 'ring';
 const _locationCommand = 'get_location';
 const _alarmCommand = 'alarm';
+
+const _alarmId = 2500;
 
 @lazySingleton
 class PermissionProvider extends BaseProvider {
@@ -54,6 +56,12 @@ class PermissionProvider extends BaseProvider {
       hasLocationPermission &&
       hasLocationServicePermission &&
       hasAlarmPermission;
+
+  bool get isAlarmRinging => _settingsRepository.settings.isAlarmRinging;
+
+  final SettingsRepository _settingsRepository;
+
+  PermissionProvider(this._settingsRepository);
 
   Future<void> initializePermissions() async {
     _hasSMSPermission = await Permission.sms.isGranted;
@@ -102,6 +110,12 @@ class PermissionProvider extends BaseProvider {
     notifyListeners();
   }
 
+  Future<void> stopAlarm() async {
+    await _settingsRepository.saveAlarm(isAlarmRinging: false);
+    await Alarm.stop(_alarmId);
+    setViewIdeal();
+  }
+
   Future<void> _setupSMS() async {
     if (!isAllAllowed) {
       return;
@@ -129,7 +143,6 @@ class PermissionProvider extends BaseProvider {
 
 @pragma('vm:entry-point')
 Future<void> backgroundMessageHandler(SmsMessage message) async {
-  // FlutterAlarmBackgroundTrigger.initialize();
   await Hive.initFlutter();
   HiveAdapter.register();
   await configureInjection();
@@ -223,14 +236,17 @@ Future<String?> _getCurrentLocation() async {
 Future<String> _setAlarm() async {
   try {
     await Alarm.init();
-    final id = math.Random().nextInt(1000);
+
+    await locator<SettingsRepository>().saveAlarm(isAlarmRinging: true);
+    locator<PermissionProvider>().setViewIdeal();
+
     final alarmSettings = AlarmSettings(
-      id: id,
+      id: _alarmId,
       dateTime: DateTime.now().add(const Duration(seconds: 2)),
       assetAudioPath: 'assets/mp3/alarm.mp3',
       loopAudio: true,
       vibrate: true,
-      fadeDuration: 300,
+      fadeDuration: 60,
       volume: 1,
       notificationTitle: 'This is the title',
       notificationBody: 'This is the body',

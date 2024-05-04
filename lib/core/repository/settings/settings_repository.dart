@@ -21,6 +21,9 @@ class SettingsRepository {
 
   Future<void> saveLogin({bool isLoggedIn = false}) async => _saveSettings(settings.copyWith(hasLoggedIn: isLoggedIn));
 
+  Future<void> saveAlarm({bool isAlarmRinging = false}) async =>
+      _saveSettings(settings.copyWith(isAlarmRinging: isAlarmRinging));
+
   Future<void> reset() async => _saveSettings(const SettingsModel());
 
   Future<void> _saveSettings(SettingsModel settings) async => _settingsBox.put('settings', settings);

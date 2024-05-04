@@ -1,8 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
 
+import '../../../core/provider/permission/permission_provider.dart';
 import '../../utils/constants/theme_colors.dart';
+import '../../widgets/buttons/primary_button.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {
@@ -20,12 +23,26 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
+              Consumer<PermissionProvider>(
+                builder: (context, provider, child) {
+                  if (!provider.isAlarmRinging) {
+                    return const SizedBox();
+                  }
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: PrimaryButton(
+                      onTap: provider.stopAlarm,
+                      text: 'Stop Alarm',
+                    ),
+                  );
+                },
+              ),
               _FeatureRow(
                 icon: Icons.contacts_rounded,
                 title: 'Access Contact',
                 body: 'Click to see instruction',
                 onTap: () => {},
-              )
+              ),
             ],
           ),
         ),
@@ -33,7 +50,7 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _Drawer extends StatelessWidget {
-  const _Drawer({super.key});
+  const _Drawer();
 
   @override
   Widget build(BuildContext context) => Drawer(
@@ -116,7 +133,7 @@ class _FeatureRow extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
