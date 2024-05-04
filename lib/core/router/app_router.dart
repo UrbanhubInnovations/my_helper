@@ -18,5 +18,9 @@ class AppRouter extends $AppRouter {
     AutoRoute(path: '/home', page: HomeRoute.page),
     AutoRoute(path: '/settings', page: SettingsRoute.page),
     AutoRoute(path: '/change-pin', page: ChangePinRoute.page),
+    AutoRoute(path: '/contact-instruction', page: ContactInstructionRoute.page),
+    AutoRoute(path: '/location-instruction', page: LocationInstructionRoute.page),
+    AutoRoute(path: '/alarm-instruction', page: AlarmInstructionRoute.page),
+    AutoRoute(path: '/sound-profile-instruction', page: SoundProfileInstructionRoute.page),
   ];
 }

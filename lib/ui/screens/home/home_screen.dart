@@ -50,25 +50,25 @@ class HomeScreen extends StatelessWidget {
                 icon: Icons.contacts_rounded,
                 title: 'Access Contact',
                 body: 'Click to see instruction',
-                onTap: () => {},
+                onTap: () => context.router.push(const ContactInstructionRoute()),
               ),
               _FeatureRow(
                 icon: Icons.location_on_outlined,
                 title: 'Access Location',
                 body: 'Click to see instructions',
-                onTap: () => {},
+                onTap: () => context.router.push(const LocationInstructionRoute()),
               ),
               _FeatureRow(
                 icon: CupertinoIcons.bell_fill,
                 title: 'Change Sound Profile',
                 body: 'Click to see instructions',
-                onTap: () => {},
+                onTap: () => context.router.push(const SoundProfileInstructionRoute()),
               ),
               _FeatureRow(
                 icon: Icons.alarm,
                 title: 'Alarm Mobile',
                 body: 'Click to see instructions',
-                onTap: () => {},
+                onTap: () => context.router.push(const AlarmInstructionRoute()),
               ),
             ],
           ),
@@ -217,43 +217,46 @@ class _FeatureRow extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(bottom: 20),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Row(
-            children: [
-              SizedBox(
-                height: 100,
-                width: 80,
-                child: Icon(
-                  icon,
-                  color: ThemeColors.primary,
-                  size: 40,
+  Widget build(BuildContext context) => GestureDetector(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              children: [
+                SizedBox(
+                  height: 100,
+                  width: 80,
+                  child: Icon(
+                    icon,
+                    color: ThemeColors.primary,
+                    size: 40,
+                  ),
                 ),
-              ),
-              const Gap(5),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                    const Gap(5),
-                    Text(
-                      body,
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                  ],
+                const Gap(5),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const Gap(5),
+                      Text(
+                        body,
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );
