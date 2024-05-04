@@ -31,8 +31,8 @@ class AuthProvider extends BaseProvider {
     this._snackBarAlert,
   );
 
-  Future<void> start() async {
-    await Future.delayed(const Duration(seconds: 2));
+  Future<void> start({bool withoutDelay = false}) async {
+    await Future.delayed(Duration(seconds: withoutDelay ? 0 : 2));
 
     await locator<PermissionProvider>().initializePermissions();
 

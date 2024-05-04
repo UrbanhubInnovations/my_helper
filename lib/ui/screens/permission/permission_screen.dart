@@ -3,13 +3,33 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/injection/injection.dart';
+import '../../../core/provider/auth/auth_provider.dart';
 import '../../../core/provider/permission/permission_provider.dart';
 import '../../utils/constants/theme_colors.dart';
 import '../../widgets/buttons/primary_button.dart';
 
 @RoutePage()
-class PermissionScreen extends StatelessWidget {
+class PermissionScreen extends StatefulWidget {
   const PermissionScreen({super.key});
+
+  @override
+  State<PermissionScreen> createState() => _PermissionScreenState();
+}
+
+class _PermissionScreenState extends State<PermissionScreen> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      locator<PermissionProvider>().initializePermissions();
+    }
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -33,12 +53,51 @@ class PermissionScreen extends StatelessWidget {
                     onTapSetup: () => context.read<PermissionProvider>().setupContactPermission(),
                     isDisabled: provider.hasContactPermission,
                   ),
+                  _PermissionRow(
+                    number: '3.',
+                    title: 'Grant Sound Profile Permission',
+                    body: 'Click to allow permission.',
+                    onTapSetup: () => context.read<PermissionProvider>().setupSoundProfilePermission(),
+                    isDisabled: provider.hasSoundProfilePermission,
+                  ),
+                  _PermissionRow(
+                    number: '4.',
+                    title: 'Grant Location Permission',
+                    body: 'Click to allow permission.',
+                    onTapSetup: () => context.read<PermissionProvider>().setupLocationPermission(),
+                    isDisabled: provider.hasLocationPermission,
+                  ),
+                  _PermissionRow(
+                    number: '5.',
+                    title: 'Grant Location Service',
+                    body: 'Click to allow service.',
+                    onTapSetup: () => context.read<PermissionProvider>().setupLocationServicePermission(),
+                    isDisabled: provider.hasLocationServicePermission,
+                  ),
+                  _PermissionRow(
+                    number: '6.',
+                    title: 'Grant Alarm Permission',
+                    body: 'Click to allow permission.',
+                    onTapSetup: () => context.read<PermissionProvider>().setupAlarmPermission(),
+                    isDisabled: provider.hasAlarmPermission,
+                  ),
+                  if (provider.isAllAllowed)
+                    PrimaryButton(
+                      onTap: () => context.read<AuthProvider>().start(withoutDelay: true),
+                      text: 'Continue',
+                    ),
                 ],
               ),
             ),
           ),
         ),
       );
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 }
 
 class _PermissionRow extends StatelessWidget {
