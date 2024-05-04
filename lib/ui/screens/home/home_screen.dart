@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +28,7 @@ class HomeScreen extends StatelessWidget {
         drawer: const _Drawer(),
         body: Padding(
           padding: const EdgeInsets.all(20),
-          child: Column(
+          child: ListView(
             children: [
               Consumer<PermissionProvider>(
                 builder: (context, provider, child) {
@@ -49,6 +50,21 @@ class HomeScreen extends StatelessWidget {
                 body: 'Click to see instruction',
                 onTap: () => {},
               ),
+              _FeatureRow(
+                  icon: Icons.location_on_outlined,
+                  title: 'Access Location',
+                  body: 'Click to see instructions',
+                  onTap: () => {}),
+              _FeatureRow(
+                  icon: CupertinoIcons.bell_fill,
+                  title: 'Change Sound Profile',
+                  body: 'Click to see instructions',
+                  onTap: () => {}),
+              _FeatureRow(
+                  icon: Icons.alarm,
+                  title: 'Alarm Mobile',
+                  body: 'Click to see instructions',
+                  onTap: () => {})
             ],
           ),
         ),
@@ -70,12 +86,44 @@ class _Drawer extends StatelessWidget {
               child: Text('Drawer Header'),
             ),
             ListTile(
-              title: const Text('Settings'),
-              onTap: () => context.router.push(const SettingsRoute()),
+              title: const Text('Home'),
+              trailing: const Icon(Icons.home),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
             ),
             ListTile(
-              title: const Text('Logout'),
-              onTap: () => context.read<AuthProvider>().logout(),
+              title: const Text('History'),
+              trailing: const Icon(Icons.history),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text('Settings'),
+              trailing: const Icon(Icons.settings),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text('Grant Permission'),
+              trailing: const Icon(Icons.done_rounded),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text('Share'),
+              trailing: const Icon(Icons.share),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
             ),
           ],
         ),
