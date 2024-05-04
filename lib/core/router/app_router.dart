@@ -13,5 +13,8 @@ class AppRouter extends $AppRouter {
       transitionsBuilder: TransitionsBuilders.fadeIn,
     ),
     AutoRoute(path: '/login', page: LoginRoute.page),
+    AutoRoute(path: '/permission', page: PermissionRoute.page),
+    AutoRoute(path: '/register', page: RegisterRoute.page),
+    AutoRoute(path: '/home', page: HomeRoute.page),
   ];
 }

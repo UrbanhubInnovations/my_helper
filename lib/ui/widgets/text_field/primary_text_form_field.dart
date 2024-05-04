@@ -42,7 +42,7 @@ class PrimaryTextField extends StatelessWidget {
         validator: validate,
         style: const TextStyle(
           fontSize: 14,
-          color: ThemeColors.white,
+          color: ThemeColors.black,
         ),
         textInputAction: textInputAction,
         autofocus: autoFocus,

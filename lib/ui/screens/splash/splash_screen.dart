@@ -4,8 +4,6 @@ import 'package:provider/provider.dart';
 
 import '../../../core/provider/auth/auth_provider.dart';
 
-// import '../../../core/provider/auth/auth_provider.dart';
-
 @RoutePage()
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
