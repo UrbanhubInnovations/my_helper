@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/provider/auth/auth_provider.dart';
 import '../../../core/provider/permission/permission_provider.dart';
+import '../../../core/router/app_router.gr.dart';
 import '../../utils/constants/theme_colors.dart';
 import '../../widgets/buttons/primary_button.dart';
 
@@ -69,11 +70,8 @@ class _Drawer extends StatelessWidget {
               child: Text('Drawer Header'),
             ),
             ListTile(
-              title: const Text('Item 1'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
+              title: const Text('Settings'),
+              onTap: () => context.router.push(const SettingsRoute()),
             ),
             ListTile(
               title: const Text('Logout'),

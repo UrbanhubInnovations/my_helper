@@ -26,5 +26,32 @@ class SettingsRepository {
 
   Future<void> reset() async => _saveSettings(const SettingsModel());
 
+  Future<void> savePreference({
+    bool? enableContact,
+    bool? enableLocation,
+    bool? enableSoundProfile,
+    bool? enableAlarm,
+  }) async {
+    SettingsModel preSettings = settings;
+
+    if (enableContact != null) {
+      preSettings = preSettings.copyWith(enableContact: enableContact);
+    }
+
+    if (enableLocation != null) {
+      preSettings = preSettings.copyWith(enableLocation: enableLocation);
+    }
+
+    if (enableSoundProfile != null) {
+      preSettings = preSettings.copyWith(enableSoundProfile: enableSoundProfile);
+    }
+
+    if (enableAlarm != null) {
+      preSettings = preSettings.copyWith(enableAlarm: enableAlarm);
+    }
+
+    await _saveSettings(preSettings);
+  }
+
   Future<void> _saveSettings(SettingsModel settings) async => _settingsBox.put('settings', settings);
 }

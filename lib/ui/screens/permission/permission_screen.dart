@@ -99,22 +99,23 @@ class _PermissionScreenState extends State<PermissionScreen> with WidgetsBinding
                 ),
               ),
               Positioned(
-                  bottom: 20,
-                  left: 20,
-                  right: 20,
-                  child: Consumer<PermissionProvider>(
-                    builder: (context, provider, child) {
-                      if (provider.isAllAllowed) {
-                        return PrimaryButton(
-                          onTap: () => context.read<AuthProvider>().start(withoutDelay: true),
-                          text: 'Continue',
-                          textColor: ThemeColors.white,
-                        );
-                      }
+                bottom: 20,
+                left: 20,
+                right: 20,
+                child: Consumer<PermissionProvider>(
+                  builder: (context, provider, child) {
+                    if (provider.isAllAllowed) {
+                      return PrimaryButton(
+                        onTap: () => context.read<AuthProvider>().start(withoutDelay: true),
+                        text: 'Continue',
+                        textColor: ThemeColors.white,
+                      );
+                    }
 
-                      return const SizedBox();
-                    },
-                  ))
+                    return const SizedBox();
+                  },
+                ),
+              ),
             ],
           ),
         ),

@@ -11,5 +11,9 @@ class SettingsModel with _$SettingsModel {
     @HiveField(0, defaultValue: false) @Default(false) bool hasLoggedIn,
     @HiveField(1, defaultValue: false) @Default(false) bool hasOnboarded,
     @HiveField(2, defaultValue: false) @Default(false) bool isAlarmRinging,
+    @HiveField(3, defaultValue: true) @Default(true) bool enableContact,
+    @HiveField(4, defaultValue: true) @Default(true) bool enableLocation,
+    @HiveField(5, defaultValue: true) @Default(true) bool enableSoundProfile,
+    @HiveField(6, defaultValue: true) @Default(true) bool enableAlarm,
   }) = _SettingsModel;
 }

@@ -39,7 +39,7 @@ class SplashScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Positioned.fill(
+              const Positioned.fill(
                 child: Center(
                   child: Text(
                     'My Helper',

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:my_helper/ui/utils/constants/theme_colors.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +9,7 @@ import 'core/injection/injection.dart';
 import 'core/provider/base/multi_providers.dart';
 import 'core/repository/settings/settings_repository.dart';
 import 'core/router/app_router.dart';
+import 'ui/utils/constants/theme_colors.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
