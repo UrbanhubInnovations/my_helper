@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:my_helper/ui/utils/constants/theme_colors.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
@@ -41,26 +42,22 @@ class MyApp extends StatelessWidget {
 
     return OverlaySupport.global(
       child: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent),
+        value: SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
           title: 'My Helper',
           routerConfig: appRouter.config(),
           theme: ThemeData(
-            expansionTileTheme: const ExpansionTileThemeData(
-                // collapsedIconColor: ThemeColors.white,
-                // iconColor: ThemeColors.white,
-                ),
             dialogTheme: const DialogTheme(
               surfaceTintColor: Colors.transparent,
             ),
             bottomSheetTheme: const BottomSheetThemeData(
               surfaceTintColor: Colors.transparent,
             ),
-            // scaffoldBackgroundColor: ThemeColors.primaryBg,
-            // colorScheme: ColorScheme.fromSwatch(primarySwatch: ThemeColors.primaryMaterial),
+            scaffoldBackgroundColor: ThemeColors.offWhite,
+            colorScheme: ColorScheme.fromSwatch(primarySwatch: ThemeColors.primaryMaterial),
             useMaterial3: true,
-            // fontFamily: ThemeTextStyle.supreme,
+            fontFamily: 'Poppins',
           ),
           builder: (BuildContext context, Widget? child) {
             final MediaQueryData data = MediaQuery.of(context);

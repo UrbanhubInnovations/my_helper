@@ -33,62 +33,89 @@ class _PermissionScreenState extends State<PermissionScreen> with WidgetsBinding
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('Setup Permissions'),
+          titleTextStyle: const TextStyle(
+            fontSize: 16,
+            color: ThemeColors.black,
+          ),
+        ),
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Consumer<PermissionProvider>(
-              builder: (context, provider, child) => Column(
-                children: [
-                  _PermissionRow(
-                    number: '1.',
-                    title: 'Grant SMS Permission',
-                    body: 'Click to allow permission.',
-                    onTapSetup: () => context.read<PermissionProvider>().setupSMSPermission(),
-                    isDisabled: provider.hasSMSPermission,
-                  ),
-                  _PermissionRow(
-                    number: '2.',
-                    title: 'Grant Contact Permission',
-                    body: 'Click to allow permission.',
-                    onTapSetup: () => context.read<PermissionProvider>().setupContactPermission(),
-                    isDisabled: provider.hasContactPermission,
-                  ),
-                  _PermissionRow(
-                    number: '3.',
-                    title: 'Grant Sound Profile Permission',
-                    body: 'Click to allow permission.',
-                    onTapSetup: () => context.read<PermissionProvider>().setupSoundProfilePermission(),
-                    isDisabled: provider.hasSoundProfilePermission,
-                  ),
-                  _PermissionRow(
-                    number: '4.',
-                    title: 'Grant Location Permission',
-                    body: 'Click to allow permission.',
-                    onTapSetup: () => context.read<PermissionProvider>().setupLocationPermission(),
-                    isDisabled: provider.hasLocationPermission,
-                  ),
-                  _PermissionRow(
-                    number: '5.',
-                    title: 'Grant Location Service',
-                    body: 'Click to allow service.',
-                    onTapSetup: () => context.read<PermissionProvider>().setupLocationServicePermission(),
-                    isDisabled: provider.hasLocationServicePermission,
-                  ),
-                  _PermissionRow(
-                    number: '6.',
-                    title: 'Grant Alarm Permission',
-                    body: 'Click to allow permission.',
-                    onTapSetup: () => context.read<PermissionProvider>().setupAlarmPermission(),
-                    isDisabled: provider.hasAlarmPermission,
-                  ),
-                  if (provider.isAllAllowed)
-                    PrimaryButton(
-                      onTap: () => context.read<AuthProvider>().start(withoutDelay: true),
-                      text: 'Continue',
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Consumer<PermissionProvider>(
+                    builder: (context, provider, child) => ListView(
+                      physics: const BouncingScrollPhysics(),
+                      children: [
+                        _PermissionRow(
+                          number: '1.',
+                          title: 'Grant SMS Permission',
+                          body: 'Click to allow permission.',
+                          onTapSetup: () => context.read<PermissionProvider>().setupSMSPermission(),
+                          isDisabled: provider.hasSMSPermission,
+                        ),
+                        _PermissionRow(
+                          number: '2.',
+                          title: 'Grant Contact Permission',
+                          body: 'Click to allow permission.',
+                          onTapSetup: () => context.read<PermissionProvider>().setupContactPermission(),
+                          isDisabled: provider.hasContactPermission,
+                        ),
+                        _PermissionRow(
+                          number: '3.',
+                          title: 'Grant Sound Profile Permission',
+                          body: 'Click to allow permission.',
+                          onTapSetup: () => context.read<PermissionProvider>().setupSoundProfilePermission(),
+                          isDisabled: provider.hasSoundProfilePermission,
+                        ),
+                        _PermissionRow(
+                          number: '4.',
+                          title: 'Grant Location Permission',
+                          body: 'Click to allow permission.',
+                          onTapSetup: () => context.read<PermissionProvider>().setupLocationPermission(),
+                          isDisabled: provider.hasLocationPermission,
+                        ),
+                        _PermissionRow(
+                          number: '5.',
+                          title: 'Grant Location Service',
+                          body: 'Click to allow service.',
+                          onTapSetup: () => context.read<PermissionProvider>().setupLocationServicePermission(),
+                          isDisabled: provider.hasLocationServicePermission,
+                        ),
+                        _PermissionRow(
+                          number: '6.',
+                          title: 'Grant Alarm Permission',
+                          body: 'Click to allow permission.',
+                          onTapSetup: () => context.read<PermissionProvider>().setupAlarmPermission(),
+                          isDisabled: provider.hasAlarmPermission,
+                        ),
+                      ],
                     ),
-                ],
+                  ),
+                ),
               ),
-            ),
+              Positioned(
+                  bottom: 20,
+                  left: 20,
+                  right: 20,
+                  child: Consumer<PermissionProvider>(
+                    builder: (context, provider, child) {
+                      if (provider.isAllAllowed) {
+                        return PrimaryButton(
+                          onTap: () => context.read<AuthProvider>().start(withoutDelay: true),
+                          text: 'Continue',
+                          textColor: ThemeColors.white,
+                        );
+                      }
+
+                      return const SizedBox();
+                    },
+                  ))
+            ],
           ),
         ),
       );
@@ -158,16 +185,19 @@ class _PermissionRow extends StatelessWidget {
             SizedBox(
               width: 70,
               height: 40,
-              child: PrimaryButton(
-                onTap: () {
-                  if (!isDisabled) {
-                    onTapSetup();
-                  }
-                },
-                text: 'Setup',
-                textColor: ThemeColors.white,
-                buttonColor: isDisabled ? ThemeColors.grey : ThemeColors.primary,
-              ),
+              child: isDisabled
+                  ? const Icon(
+                      Icons.done_rounded,
+                      size: 20,
+                      color: Colors.green,
+                    )
+                  : PrimaryButton(
+                      onTap: onTapSetup,
+                      text: 'Setup',
+                      fontSize: 14,
+                      textColor: ThemeColors.white,
+                      buttonColor: ThemeColors.primary,
+                    ),
             ),
           ],
         ),

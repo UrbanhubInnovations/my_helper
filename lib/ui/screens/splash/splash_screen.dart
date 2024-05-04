@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/provider/auth/auth_provider.dart';
@@ -15,25 +15,40 @@ class SplashScreen extends StatelessWidget {
     context.read<AuthProvider>().start();
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            Image.asset(ImageAssets.logo),
-            const Expanded(
-              child: Center(
-                child: Text(
-                  'My Helper',
-                  style: TextStyle(fontSize: 32),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  const Gap(40),
+                  SizedBox(
+                    width: MediaQuery.sizeOf(context).width * 0.5,
+                    height: MediaQuery.sizeOf(context).height * 0.3,
+                    child: Image.asset(ImageAssets.logo),
+                  ),
+                  const Spacer(),
+                  const SizedBox(
+                    width: double.maxFinite,
+                  ),
+                  const Text(
+                    'Powered By Students of\nJaypee University of Guna MP',
+                    style: TextStyle(fontSize: 12),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+              Positioned.fill(
+                child: Center(
+                  child: Text(
+                    'My Helper',
+                    style: TextStyle(fontSize: 32),
+                  ),
                 ),
               ),
-            ),
-            const Text(
-              'Powered By Students of\nJaypee University of Guna MP',
-              style: TextStyle(fontSize: 12),
-              textAlign: TextAlign.center,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
